@@ -35,3 +35,20 @@ VALUES('micky mouse', 'LA', 99, 100, 1234.56);
 --The bank is losing money in Miami and Phoenix and needs to unload low transaction customers: How do you delete users that reside in miami OR phoenix and have completed fewer than 5 transactions.
 DELETE FROM "accounts"
 WHERE ("city" = 'miami' OR "city" = 'phoenix') AND "transactions_completed" < 5;
+
+--Anthony moved to Santa Fe.
+UPDATE "accounts" SET "city" = 'Santa Fe'
+WHERE "username" = 'anthony';
+
+--Grace closed her account.
+DELETE FROM "accounts"
+WHERE "username" = 'grace';
+
+--Travis made a withdrawl of $20,000. What's their new balance? NOTE: Research RETURNING
+UPDATE "accounts" SET "account_balance" = "account_balance" - 20000
+WHERE "username" = 'travis'
+RETURNING "account_balance";
+
+--The Bank needs to track last names. NOTE: Research ALTER TABLE https://www.postgresql.org/docs/10/static/sql-altertable.html
+ALTER TABLE "accounts" 
+ADD COLUMN  "lastname" varchar(12);
